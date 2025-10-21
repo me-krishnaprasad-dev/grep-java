@@ -28,7 +28,7 @@ public class Main {
     } else if(pattern.equals("\\d")) {
         return inputLine.chars().anyMatch(Character::isDigit);
     } else if(pattern.contains("\\w")){
-        return inputLine.chars().anyMatch(Character::isAlphabetic);
+        return inputLine.chars().anyMatch(c -> Character.isLetterOrDigit(c) || c == '_');
     }else {
       throw new RuntimeException("Unhandled pattern: " + pattern);
     }
