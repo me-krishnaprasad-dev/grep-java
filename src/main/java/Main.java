@@ -32,6 +32,9 @@ public class Main {
     } else if(pattern.contains("[") && pattern.contains("]") && pattern.indexOf("[") < pattern.indexOf("]")){
         String subString = pattern.substring(pattern.indexOf("["), pattern.indexOf("]"));
         return inputLine.chars().anyMatch(c -> subString.indexOf(c) > 0);
+    } else if(pattern.contains("[^") && pattern.contains("]") && pattern.indexOf("[^") < pattern.indexOf("]")){
+        String subString = pattern.substring(pattern.indexOf("[^"), pattern.indexOf("]"));
+        return inputLine.chars().allMatch(c -> subString.indexOf(c) > 0);
     } else {
       throw new RuntimeException("Unhandled pattern: " + pattern);
     }
