@@ -29,7 +29,10 @@ public class Main {
         return inputLine.chars().anyMatch(Character::isDigit);
     } else if(pattern.contains("\\w")){
         return inputLine.chars().anyMatch(c -> Character.isLetterOrDigit(c) || c == '_');
-    }else {
+    } else if(pattern.contains("[") && pattern.contains("]") && pattern.indexOf("[") < pattern.indexOf("]")){
+        String subString = pattern.substring(pattern.indexOf("["), pattern.indexOf("]"));
+        return inputLine.chars().anyMatch(c -> subString.indexOf(c) > 0);
+    } else {
       throw new RuntimeException("Unhandled pattern: " + pattern);
     }
   }
