@@ -30,7 +30,8 @@ public class Main {
     } else if(pattern.contains("\\w")){
         return inputLine.chars().anyMatch(c -> Character.isLetterOrDigit(c) || c == '_');
     } else if(pattern.contains("[") && pattern.contains("]")
-            && pattern.indexOf("[") < pattern.indexOf("]")){
+            && pattern.indexOf("[") < pattern.indexOf("]")
+            && pattern.length() > 2){
         String subString = pattern.substring(pattern.indexOf("["), pattern.indexOf("]"));
         if(subString.startsWith("^")){
             return inputLine.chars().anyMatch(c -> subString.substring(1).indexOf(c) == -1);
