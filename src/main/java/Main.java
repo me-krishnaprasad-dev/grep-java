@@ -29,14 +29,11 @@ public class Main {
         return inputLine.chars().anyMatch(Character::isDigit);
     } else if(pattern.contains("\\w")){
         return inputLine.chars().anyMatch(c -> Character.isLetterOrDigit(c) || c == '_');
-    } else if(pattern.contains("[") && pattern.contains("]")
-            && pattern.indexOf("[") < pattern.indexOf("]")
-            && pattern.length() > 2){
-        String subString = pattern.substring(pattern.indexOf("["), pattern.indexOf("]"));
-        if(subString.startsWith("^")){
-            return inputLine.chars().anyMatch(c -> subString.substring(1).indexOf(c) == -1);
-        }
-        return inputLine.chars().anyMatch(c -> subString.indexOf(c) > 0);
+    } else if (pattern.startsWith("[") && pattern.endsWith("]") && pattern.length() > 2) {
+        String ss = pattern.substring(1, pattern.length() - 1);
+        if (ss.startsWith("^"))
+            return inputLine.chars().anyMatch(c -> ss.substring(1).indexOf(c) == -1);
+        return inputLine.chars().anyMatch(a -> ss.indexOf(a) >= 0);
     } else {
       throw new RuntimeException("Unhandled pattern: " + pattern);
     }
