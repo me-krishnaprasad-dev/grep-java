@@ -31,10 +31,10 @@ public class Main {
         return inputLine.chars().anyMatch(c -> Character.isLetterOrDigit(c) || c == '_');
     } else if(pattern.contains("[") && pattern.contains("]") && pattern.indexOf("[") < pattern.indexOf("]")){
         String subString = pattern.substring(pattern.indexOf("["), pattern.indexOf("]"));
+        if(subString.startsWith("^")){
+            return inputLine.chars().allMatch(c -> subString.substring(1).indexOf(c) > 0);
+        }
         return inputLine.chars().anyMatch(c -> subString.indexOf(c) > 0);
-    } else if(pattern.contains("[^") && pattern.contains("]") && pattern.indexOf("[^") < pattern.indexOf("]")){
-        String subString = pattern.substring(pattern.indexOf("[^"), pattern.indexOf("]"));
-        return inputLine.chars().allMatch(c -> subString.indexOf(c) > 0);
     } else {
       throw new RuntimeException("Unhandled pattern: " + pattern);
     }
